@@ -1,5 +1,6 @@
 package com.epam.homework.beans;
 
+import com.epam.homework.task7.ToUpperCase;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +27,7 @@ public class JazzMusic implements Music {
     }
 
     @Override
+    @ToUpperCase
     public String getMusician() {
         return musician;
     }

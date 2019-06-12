@@ -32,16 +32,12 @@ public class CustomBeanFactory extends DefaultListableBeanFactory {
         try {
             Class<?> clazz = Class.forName(beansPackage + "." + name);
             Constructor<?>[] constructors = clazz.getConstructors();
-            if (constructors.length > 1) {
-                throw new RuntimeException("Can't choose constructor. Should be 0 or 1");
-            }
-            for (Constructor<?> constructor : clazz.getConstructors()) {
-                return constructor.newInstance(null);
-            }
+            return constructors[0].newInstance(null);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Bean must have one default constructor with no arguments ", e);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
-        throw new RuntimeException("Can't create bean");
     }
 
     @Override

@@ -4,15 +4,14 @@ import com.epam.homework.beans.JazzMusic;
 import com.epam.homework.beans.Music;
 import com.epam.homework.beans.PopMusic;
 import com.epam.homework.beans.RockMusic;
-import com.epam.homework.task5.CustomBean;
-import com.epam.homework.task5.CustomScope;
 import org.junit.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 public class Tasks {
 
@@ -108,5 +107,17 @@ public class Tasks {
         ctx.close();
         assertThat(pop.getSong(), equalTo("Predestroyed pop song"));
         assertThat(jazz.getSong(), equalTo("Predestroyed jazz song"));
+    }
+
+    /**
+     * Annotation @ToUpperCase makes method return String value in upper case. Used cglib to create proxy.
+     */
+    @Test
+    public void task7() {
+        AnnotationConfigApplicationContext ctx =
+                new AnnotationConfigApplicationContext("com.epam.homework.beans", "com.epam.homework.task7");
+
+        JazzMusic jazz = ctx.getBean(JazzMusic.class);
+        assertThat(jazz.getMusician(), equalTo("LOUIS ARMSTRONG"));
     }
 }
