@@ -11,6 +11,11 @@ public class JazzMusic implements Music {
     private String musician = "Louis Armstrong";
     private String song = "What a wonderful world";
 
+    @PostConstruct
+    public void init() {
+        this.song = "Inited jazz song";
+    }
+
     @Override
     public void play() {
         System.out.println(musician + ": " + song);
@@ -35,11 +40,6 @@ public class JazzMusic implements Music {
     @Override
     public String getSong() {
         return song;
-    }
-
-    @PostConstruct
-    public void init() {
-        this.song = "Inited jazz song";
     }
 
     @PreDestroy

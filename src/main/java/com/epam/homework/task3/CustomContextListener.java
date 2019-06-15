@@ -6,14 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.ContextStartedEvent;
-import org.springframework.context.event.ContextStoppedEvent;
+import org.springframework.context.event.*;
 import org.springframework.context.support.AbstractApplicationContext;
 
 @Configuration
-public class CustomContextListener implements ApplicationListener {
+public class CustomContextListener implements ApplicationListener<ApplicationContextEvent> {
 
     private AbstractApplicationContext applicationContext;
 
@@ -23,7 +20,7 @@ public class CustomContextListener implements ApplicationListener {
     }
 
     @Override
-    public void onApplicationEvent(ApplicationEvent event) {
+    public void onApplicationEvent(ApplicationContextEvent event) {
         JazzMusic jazzMusic = applicationContext.getBeanFactory().getBean(JazzMusic.class);
         if (event instanceof ContextStartedEvent) {
             jazzMusic.setMusician("Started musician");

@@ -9,8 +9,12 @@ import org.springframework.context.annotation.Configuration;
 public class CustomBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        Music beanMusic = (Music) bean;
-        beanMusic.setMusician("Custom musician");
+        if (bean instanceof Music) {
+            Music beanMusic = (Music) bean;
+            beanMusic.setMusician("Custom musician");
+        } else {
+            System.out.println("Bean does not implementing Music interface");
+        }
         return bean;
     }
 
