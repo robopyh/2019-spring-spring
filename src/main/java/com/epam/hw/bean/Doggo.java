@@ -1,5 +1,8 @@
 package com.epam.hw.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Doggo {
 
   private String name;
