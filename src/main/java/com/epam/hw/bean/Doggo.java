@@ -1,7 +1,9 @@
 package com.epam.hw.bean;
 
+import com.epam.hw.annotation.LogMethods;
 import org.springframework.stereotype.Component;
 
+@LogMethods
 @Component
 public class Doggo {
 
