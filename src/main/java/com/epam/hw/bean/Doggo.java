@@ -1,6 +1,8 @@
 package com.epam.hw.bean;
 
 import com.epam.hw.annotation.LogMethods;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,11 @@ public class Doggo {
   private boolean goodBoy;
 
   public Doggo() {
+  }
+
+  @PostConstruct
+  private void init() {
+    System.out.println("Setting up doggo bean...");
   }
 
   public String getName() {
@@ -38,5 +45,13 @@ public class Doggo {
 
   public void setGoodBoy(boolean goodBoy) {
     this.goodBoy = goodBoy;
+  }
+
+  @PreDestroy
+  private void dispose() {
+    System.out.println("Destroying doggo bean...");
+    name = "";
+    breed = "";
+    goodBoy = false;
   }
 }

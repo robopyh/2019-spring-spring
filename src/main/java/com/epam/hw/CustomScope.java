@@ -11,6 +11,7 @@ public class CustomScope implements Scope {
   private static final int USAGE_MIN = 1;
   private static final int USAGE_MAX = 3;
   private final Map<String, Pair<Integer, Object>> map = new HashMap<>();
+  private final Map<String, Runnable> destructionCallbacks = new HashMap<>();
 
   @Override
   public Object get(String name, ObjectFactory<?> objectFactory) {
@@ -29,21 +30,22 @@ public class CustomScope implements Scope {
 
   @Override
   public Object remove(String name) {
-    throw new UnsupportedOperationException();
+    destructionCallbacks.remove(name);
+    return map.remove(name);
   }
 
   @Override
   public void registerDestructionCallback(String name, Runnable callback) {
-    throw new UnsupportedOperationException();
+    destructionCallbacks.put(name, callback);
   }
 
   @Override
   public Object resolveContextualObject(String key) {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
   public String getConversationId() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 }
