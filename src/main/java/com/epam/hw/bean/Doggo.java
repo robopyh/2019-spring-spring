@@ -1,10 +1,12 @@
 package com.epam.hw.bean;
 
 import com.epam.hw.annotation.LogMethods;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @LogMethods
 @Component
+@Scope("custom")
 public class Doggo {
 
   private String name;
